@@ -1,0 +1,252 @@
+/* Contact Page */
+.contactContainer {
+    width: 100%;
+}
+
+.map {
+    overflow: hidden;
+    height: 50vh;
+    width: 100%;
+    margin: 8rem auto 2rem;
+    position: relative;
+}
+
+.map iframe {
+    border: none;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.contactDetailsContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    gap: 2rem;  
+    padding: 1rem;
+}
+
+/* Contact card */
+.contactCard {
+    box-shadow: 0 0 15px;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    width: 22rem;
+    font-size: 1vw;
+    background-image: url("https://images.unsplash.com/photo-1621188988909-fbef0a88dc04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZvb2RzfGVufDB8fDB8fHww");
+}
+
+.contactDetails {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.contactDetails:first-child, .contactDetails:nth-child(2) {
+    margin-bottom: 2rem;
+}
+
+.contactDetailsIcon {
+    padding: 0.9rem;
+    border: 1px solid ;
+    border-radius: 50%;
+}
+
+.contactInfo h3, .contactInfo p {
+    text-align: left;
+}
+
+/* Contact Form */
+.contactForm {
+    box-shadow: 0 0 15px;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    height: auto;
+    background-image: url("https://images.unsplash.com/photo-1621188988909-fbef0a88dc04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZvb2RzfGVufDB8fDB8fHww");
+    object-fit: cover;
+    background-position:center;
+    /* background-size: cover; */
+    background-repeat: no-repeat;
+}
+
+.contactForm .inputs input, .contactForm .inputs textarea {
+    border: 1px solid;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.contactForm .controls .btn {
+    padding: 0.2rem 0.5rem;
+}
+
+/* Sign Up and Sign In Page */
+.formContainer {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.form {
+    height: auto;
+    width: 25rem;
+}
+
+.inputField {
+    position: absolute;
+    top: -35%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    box-shadow: 0 0 15px ;
+    padding: 1rem;
+    opacity: 1;
+    pointer-events: all;
+    transition: 0.1s ease;
+    border-radius: 1rem;
+}
+
+.hideInputField {
+    left: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.form .inputField .inputs > input{
+    border-bottom: 1px solid;
+}
+
+.showPasswordCheckbox {
+    margin: 0.5rem 0 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.inputField .controls {
+    text-align: center;
+    color: #fff;
+}
+.verificationField {
+    position: absolute;
+    top: 50%;
+    left: 100%;  /* Change to center initially */
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;  /* Set opacity to 0 initially */
+    transition: 300ms ease;  /* Only transition opacity */
+}
+
+
+.showVerificationField {
+    opacity: 1;
+    pointer-events: all;
+    left: 50%;
+    z-index: 2;
+}
+
+.verificationField .inputs {
+    display: flex;
+    gap: 1rem;
+}
+
+.verificationField .inputs input {
+    height: 2rem;
+    width: 5rem;
+    box-shadow: 0 0 5px orange;
+    border: none;
+    /* border-radius: 1rem; */
+    margin: 0 auto;
+}
+
+.verificationField .controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.verificationField .controls .btn {
+    border-radius: 0;
+    padding: 0.3rem;
+    color: #fff;
+}
+
+.authHeader {
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.authHeader svg {
+    font-size: 2.5rem;
+}
+
+.askAccount p{
+    text-align: center;
+    margin: 1.5rem 0 0.3rem;
+}
+
+
+/* Sign In Page */
+
+.loginInputField {
+    top: 0;
+}
+
+/* Menu Page */
+.allDishes {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 8rem;
+}
+
+.allDishes .dish {
+    background: #efefef;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.priceContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.priceContainer .units {
+    display: flex;
+}
+.priceContainer .units p:first-child {
+    border-radius: 0.5rem 0 0 0.5rem;
+    cursor: pointer;
+}
+
+.priceContainer .units p:nth-child(2) {
+    border-radius: 0;
+}
+
+.priceContainer .units p:nth-child(3) {
+    border-radius: 0 0.5rem 0.5rem 0;
+    cursor: pointer;
+}
+
+.priceContainer p {
+    padding: 0.3rem 0.8rem;
+    background  : rgb(44, 42, 42);
+    color: #fff;
+    border-radius: 0.5rem;
+}
+
+.priceContainer .controls {
+    width: 50%;
+}
+
+.priceContainer .controls .btn{
+    padding:0.3rem 0.8rem ;
+    border-radius: 0.5rem;
+    width: 100%;
+}

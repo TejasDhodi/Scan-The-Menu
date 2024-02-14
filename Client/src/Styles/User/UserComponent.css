@@ -1,0 +1,206 @@
+.header {
+    position: relative;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    height: 6.5rem;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hideNav {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+}
+
+.navBrand img {
+    height: 5rem;
+    width: 6rem;
+}
+
+.navItems {
+    display: flex;
+    gap: 5rem;
+}
+
+
+.navLink {
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: 300ms ease-in-out;
+}
+
+.navLink:hover {
+    padding: 0.5rem 0;
+    border-top: 2px solid #EA6D27;;
+    border-bottom: 2px solid #EA6D27;
+    border-radius: 0.5rem;
+}
+
+.carts {
+    display: flex;
+    gap: 5rem;
+}
+
+.profileInfo {
+    display: none;
+    position: relative;
+}
+
+.down {
+    transform: rotate(180deg);
+    transition: 300ms ease-in-out;
+}
+
+/* Profile Links */
+
+.profileLinks {
+    position: fixed;
+    height: auto;
+    width: 12rem;
+    background-color: #fff;
+    right: 0;
+    top: 6.27rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    box-shadow: 0 0 15px;
+    z-index: 1;
+    opacity: 0;
+    transition: 300ms ease-in-out;
+    pointer-events: none;
+}
+
+.showprofile {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 100vh;
+    margin-top: 3rem;
+}
+
+.heroDescription {
+    width: 100%;
+}
+
+.heroImageContainer {
+    position: relative;
+    width: 100%;
+}
+
+.heroImage {
+    width: 100%;
+    text-align: right;
+}
+.heroImage img:first-child {
+    height: 30rem;
+    width: 70%;
+    border-radius: 0.5rem;
+}
+
+.heroImage img:nth-child(2) {
+    position: absolute;
+    left: 3rem;
+    bottom: 2rem;
+    height: 15rem;
+}
+
+/* Speeciality Component */
+
+#Specialities {
+    background-image: url('/Images/—Pngtree—happy chef and waiter_4433814.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: fill;
+    background-size: contain;
+}
+
+.speciality {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.specialityContainer .speciality:nth-child(2) {
+    flex-direction: row-reverse;
+}
+
+.specialityImg img {
+    height: 13rem;
+    width: 15rem;
+}
+
+.specialityDescription h3 {
+    text-align: left;
+    margin-bottom: 1.5rem;
+    text-decoration: underline;
+}
+
+/* Recommendations Component */
+.dishContainer {
+   display: flex;
+   justify-content: space-between;
+   margin: 2rem 0;
+}
+
+.dish {
+    height: auto;
+    width: 22%;
+    position: relative;
+}
+
+.dishImage img {
+    height: 10rem;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 1.2rem;
+}
+
+.dishImage span {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: #EA6D27;
+    cursor: pointer;
+}
+
+/* Scan The QR */
+
+#Scan .speciality {
+    margin: 2rem 0;
+    align-items: flex-start;
+}
+
+#Scan .specialityImg img {
+    height: 13rem;
+    width: 41rem;
+    object-fit: cover;
+}
+
+#Scan .specialityDescription p  {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+#Scan .specialityDescription p svg{
+    color: #EA6D27;
+}
