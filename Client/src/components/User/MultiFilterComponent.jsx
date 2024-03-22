@@ -6,6 +6,7 @@ const MultiFilterComponent = ({ handleChecked, handleSelectCategory, priceRanges
     const { filterType, filterValue } = useParams();
 
     const dishes = useSelector(state => state.Dish.Dishes);
+    const isShowFilterTrue = useSelector(state => state.filters.multiFilter);
 
     const categories = dishes && [...new Set(dishes.map((currElem) => currElem.category))];
     const types = dishes && [...new Set(dishes.map((currElem) => currElem.cusine))]
@@ -19,54 +20,56 @@ const MultiFilterComponent = ({ handleChecked, handleSelectCategory, priceRanges
     }
 
     return (
-        <div className='multiFilter'>
-            <form className='cusineFilter filters'>
-                {
-                    filterType == 'cusine' ?
-                        types.map((currElem, index) => {
-                            return <div className='checkBoxes' key={index}>
-                                <label htmlFor={currElem} className={(filterValue !== currElem) ? 'checkbox disableCheck' : 'checkbox'}> {currElem.toLocaleUpperCase()} </label>
-                                <input type="checkbox"
-                                    name={currElem}
-                                    id={currElem}
-                                    value={currElem}
-                                    onChange={(e) => handleChecked(e.target.checked, currElem)}
-                                    disabled={filterType == 'cusine' && filterValue !== currElem}
-                                    checked={filterType == 'cusine' && filterValue === currElem}
-                                />
-                            </div>
-                        })
-                        :
-                        types.map((currElem, index) => {
-                            return <div className='checkBoxes' key={index}>
-                                <label htmlFor={currElem} className='inputLabel'> {currElem.toLocaleUpperCase()} </label>
-                                <input type="checkbox"
-                                    name={currElem}
-                                    id={currElem}
-                                    value={currElem}
-                                    onChange={(e) => handleChecked(e.target.checked, currElem)}
-                                />
-                            </div>
-                        })
-                }
-            </form>
-
-            <form className="categoryFilter filters">
-                <select name="categoryFilter" id="categoryFilter" onChange={(e) => handleCusineFilter(e.target.name, e.target.value)}>
-                    <option value="" disabled>Select Category</option>
+        <>
+            <div className={isShowFilterTrue? 'multiFilter shoMultiFilter': 'multiFilter'}>
+                <form className='cusineFilter filters'>
                     {
-                        categories.map((currElem, index) => {
-                            return <option value={currElem} key={index}>{currElem}</option>
-                        })
+                        filterType == 'cusine' ?
+                            types.map((currElem, index) => {
+                                return <div className='checkBoxes' key={index}>
+                                    <label htmlFor={currElem} className={(filterValue !== currElem) ? 'checkbox disableCheck' : 'checkbox'}> {currElem.toLocaleUpperCase()} </label>
+                                    <input type="checkbox"
+                                        name={currElem}
+                                        id={currElem}
+                                        value={currElem}
+                                        onChange={(e) => handleChecked(e.target.checked, currElem)}
+                                        disabled={filterType == 'cusine' && filterValue !== currElem}
+                                        checked={filterType == 'cusine' && filterValue === currElem}
+                                    />
+                                </div>
+                            })
+                            :
+                            types.map((currElem, index) => {
+                                return <div className='checkBoxes' key={index}>
+                                    <label htmlFor={currElem} className='inputLabel'> {currElem.toLocaleUpperCase()} </label>
+                                    <input type="checkbox"
+                                        name={currElem}
+                                        id={currElem}
+                                        value={currElem}
+                                        onChange={(e) => handleChecked(e.target.checked, currElem)}
+                                    />
+                                </div>
+                            })
                     }
-                </select>
-            </form>
+                </form>
 
-            <form action="" className="priceFilter filters">
-                <label htmlFor="priceRange">0 - {priceRanges}</label> <br />
-                <input type="range" name="priceRange" id='priceRange' min={0} max={1000} value={priceRanges} onChange={(e) => setPriceRange(e.target.value)} />
-            </form>
-        </div>
+                <form className="categoryFilter filters">
+                    <select name="categoryFilter" id="categoryFilter" onChange={(e) => handleCusineFilter(e.target.name, e.target.value)}>
+                        <option value="" disabled>Select Category</option>
+                        {
+                            categories.map((currElem, index) => {
+                                return <option value={currElem} key={index}>{currElem}</option>
+                            })
+                        }
+                    </select>
+                </form>
+
+                <form action="" className="priceFilter filters">
+                    <label htmlFor="priceRange">0 - {priceRanges}</label> <br />
+                    <input type="range" name="priceRange" id='priceRange' min={0} max={1000} value={priceRanges} onChange={(e) => setPriceRange(e.target.value)} />
+                </form>
+            </div>
+        </>
     )
 }
 

@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { FaHeart, FaQuestion } from "react-icons/fa";
 import { IoTriangleSharp } from "react-icons/io5";
 import { add } from '../../Features/CartSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToWishList, removeFromWishList } from '../../Features/WishListSlice';
 
 const DishesComponent = ({ file, dishName, type, handleShowDescription, dishPrice, currElem, wishList }) => {
 
   const dispatch = useDispatch();
+  
+  const authToken = useSelector(state => state.authentication.data);
   const [popUp, setPopUp] = useState(false)
 
   const handleWishList = (dish) => {
@@ -18,7 +20,7 @@ const DishesComponent = ({ file, dishName, type, handleShowDescription, dishPric
       setPopUp(false)
     }, 300);
 
-    dispatch(addToWishList(dish))
+    authToken && dispatch(addToWishList(dish))
   };
 
 

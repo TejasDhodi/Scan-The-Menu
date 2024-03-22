@@ -364,17 +364,33 @@
 }
 
 /* User Profile */
+.profileNav {
+    position: relative;
+}
+
+.getProfileLinks .filterButton{
+    top: 10rem;
+    left: 1rem;
+    z-index: 51;
+}
+
 .userNavLinks {
     height: 100vh;
     background: antiquewhite;
-    width: 13vw;
+    width: 20rem;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 100%;
     display: flex;  
     flex-direction: column;
-    padding: 9rem 1rem 0;
+    padding: 15rem 1rem 0;
     gap: 1.5rem;
+    transition: 300ms ease;
+    z-index: 50;
+}
+
+.showUserNavlinks {
+    left: 0;
 }
 
 .userNavLinks li {
@@ -405,4 +421,32 @@
 /* WishLIst */
 .wishList .dish, .recentOrders .dish {
     margin: 1rem 0;
+}
+
+@media screen and (max-width: 840px) {
+    .menuContainer {
+        padding: 25% 2% 2%;
+    }
+    .sliderHeader h2 {
+        text-align: left;
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 481px) {
+    .cartContainer {
+        padding: 40% 0 0;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .menuContainer {
+        padding: 32% 2% 2%;
+    }
+
+    .sliderHeader h2 {
+        text-align: left;
+        font-size: 1.7rem;
+        line-height: 1.5;
+    }
 }

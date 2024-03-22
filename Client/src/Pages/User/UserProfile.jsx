@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { FaHeart, FaUser } from 'react-icons/fa'
 import { FaClockRotateLeft } from "react-icons/fa6";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DishesComponent from '../../components/User/DishesComponent';
-import { addToWishList } from '../../Features/WishListSlice';
+import { setProfileToggleTrue } from '../../Features/FilterSlice';
 
 const UserProfile = () => {
 
@@ -15,6 +15,9 @@ const UserProfile = () => {
     const encodedName = encodeURIComponent(userName)
 
     const wishList = useSelector(state => state.wishList.wishList);
+    const isProfileToggle = useSelector(state => state.filters.profileToggle);
+
+    const dispatch = useDispatch();
 
     const handleShowContents = (contentName) => {
         setContent(contentName);
@@ -48,11 +51,16 @@ const UserProfile = () => {
     return (
         <main className='profile'>
 
-            <section className="profileControls">
-                <ul className="userNavLinks">
-                    <li className={content === 'wishList'? 'linkIcons activePro': 'linkIcons'} onClick={() => handleShowContents('wishList')}><FaHeart /> Wishlist</li>
-                    <li className={content === 'recent'? 'linkIcons activePro': 'linkIcons'} onClick={() => handleShowContents('recent')}><FaClockRotateLeft /> Recent Orders</li>
-                </ul>
+            <section className="profileNav">
+                <div className="getProfileLinks">
+                    <button className="filterButton" onClick={() => dispatch(setProfileToggleTrue())}>{isProfileToggle && '<-'}Filter {!isProfileToggle && '->'}</button>
+                </div>
+                <div className="profileControls">
+                    <ul className={isProfileToggle? "userNavLinks showUserNavlinks": "userNavLinks"} >
+                        <li className={content === 'wishList' ? 'linkIcons activePro' : 'linkIcons'} onClick={() => handleShowContents('wishList')}><FaHeart /> Wishlist</li>
+                        <li className={content === 'recent' ? 'linkIcons activePro' : 'linkIcons'} onClick={() => handleShowContents('recent')}><FaClockRotateLeft /> Recent Orders</li>
+                    </ul>
+                </div>
             </section>
 
             <section className="profileContents">
@@ -61,8 +69,8 @@ const UserProfile = () => {
                     content === 'wishList' &&
                     <div className="wishList allDishes">
                         {
-                          wishList &&   wishList.map((list, index) => {
-                                const {_id, file, dishName, dishPrice, type } = list;
+                            wishList && wishList.map((list, index) => {
+                                const { _id, file, dishName, dishPrice, type } = list;
                                 return (
                                     <DishesComponent
                                         key={_id}
@@ -76,7 +84,7 @@ const UserProfile = () => {
                                 )
                             })
                         }
-                        
+
                         {
                             wishList && wishList.length === 0 && <h2>Nothing Available In Wishlist</h2>
                         }

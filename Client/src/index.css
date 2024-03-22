@@ -34,7 +34,7 @@ table tr td {
 }
 
 .section {
-  margin: 0 0 5rem;
+  margin: 2rem 0;
 }
 
 .section>p {
@@ -178,10 +178,21 @@ td {
   z-index: 100;
 }
 
+@media screen and (max-width: 1280px) {
+  h1 {
+    font-size: 3rem;
+    line-height: 2.5rem;
+  }
+}
+
 @media screen and (max-width:1025px) {
   h1 {
     font-size: 2.3rem;
     line-height: 2.5rem;
+  }
+
+  .main {
+    margin: 0 4%;
   }
 }
 
@@ -197,4 +208,19 @@ td {
     font-size: 1rem;
     padding: 10px 15px
   }
+
+  .section h2 {
+    font-size: 2.5rem;
+  }
 }
+
+@media screen and (max-width:400px) {
+  .main {
+    margin: 0 2%;
+}
+  .section h2 {
+    font-size: 2.2rem;
+  }
+}
+
+

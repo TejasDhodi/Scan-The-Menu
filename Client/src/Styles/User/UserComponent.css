@@ -1,6 +1,7 @@
 .header {
     position: relative;
 }
+
 .navbar {
     position: fixed;
     top: 0;
@@ -40,14 +41,10 @@
 
 .navLink:hover {
     padding: 0.5rem 0;
-    border-top: 2px solid #EA6D27;;
+    border-top: 2px solid #EA6D27;
+    ;
     border-bottom: 2px solid #EA6D27;
     border-radius: 0.5rem;
-}
-
-.carts {
-    display: flex;
-    gap: 5rem;
 }
 
 .profileInfo {
@@ -107,6 +104,7 @@
     width: 100%;
     text-align: right;
 }
+
 .heroImage img:first-child {
     height: 30rem;
     width: 70%;
@@ -135,6 +133,7 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+    margin-bottom: 1rem;
 }
 
 .specialityContainer .speciality:nth-child(2) {
@@ -154,15 +153,16 @@
 
 /* Recommendations Component */
 .dishContainer {
-   display: flex;
-   justify-content: space-between;
-   margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
 }
 
 .dish {
     height: auto;
     width: 20rem;
     position: relative;
+    margin-left: 10px;
 }
 
 .dishImage img {
@@ -172,7 +172,8 @@
     border-radius: 1.2rem;
 }
 
-.dishImage .dishDetals, .dishImage .category {
+.dishImage .dishDetals,
+.dishImage .category {
     position: absolute;
     right: 0;
     top: 0;
@@ -225,34 +226,45 @@
     object-fit: cover;
 }
 
-#Scan .specialityDescription p  {
+#Scan .specialityDescription p {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
 
-#Scan .specialityDescription p svg{
+#Scan .specialityDescription p svg {
     color: #EA6D27;
 }
 
 /* Filter Component */
 
 .menu {
-    width: 90%;
+    width: 100%;
 }
 
 .searChFilter {
-    text-align:  center;
+    text-align: center;
     margin: 4rem 0 0;
-
+    position: relative;
 }
 
-.searChFilter input{
-    width: 80%;
+.filterButton {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 1rem 1.5rem;
+    border-radius: 0 1rem 1rem 0;
+    background: #EA6D27;
+    color: #fff;
+    z-index: 50;
+}
+
+.searChFilter input {
+    width: 50%;
     margin: 1rem auto;
     padding: 1rem;
     border: 1px solid;
-    border-radius: 1rem;
+    border-radius: 1rem 0 0 1rem    ;
     text-align: center;
     background: #585858;
     color: #ffff;
@@ -261,13 +273,18 @@
 /* Multifilter Component */
 .multiFilter {
     position: fixed;
-    right: 0;
+    right: 100%;
     height: 100%;
     background: #585858;
-    padding: 5rem 1rem;
+    padding: 9rem 1rem;
     display: flex;
     flex-direction: column;
     color: #c5c5c5;
+    transition: 300ms ease;
+}
+
+.shoMultiFilter {
+    right: 0;
 }
 
 .filters {
@@ -283,7 +300,8 @@
     margin: 1rem 0;
 }
 
-.cusineFilter .checkBoxes, .priceFilter .prices {
+.cusineFilter .checkBoxes,
+.priceFilter .prices {
     display: flex;
     justify-content: end;
     gap: 1rem;
@@ -295,6 +313,128 @@
 }
 
 .disableCheck {
-    text-decoration:line-through;
+    text-decoration: line-through;
 }
 
+@media screen and (max-width: 1024px) {  
+    .hamburgerMenu {
+        display: block;
+    }
+
+    .bar {
+        height: 0.2rem;
+        width: 1.5rem;
+        background-color: #EA6D27;
+        margin: 0.3rem 0;
+        position: relative;
+        z-index: 100;
+        transition: 300ms ease;
+
+    }
+
+    .toggleNav {
+        right: 0;
+    }
+
+
+    .toggle #bar1 {
+        transform: rotateZ(45deg) translate(11px);
+        background-image: linear-gradient(to left, #fbdac7 50%,  #EA6D27 50%);
+    }
+
+    .toggle #bar2 {
+        right: 25%;
+        border-radius: 0 0.7rem 0.7rem 0;
+    }
+
+    .toggle #bar3 {
+        transform: rotateZ(-45deg) translate(12px);
+        background-image: linear-gradient(to left, #fbdac7 50%, #EA6D27 50%);
+    }
+
+    .navItems {
+        flex-direction: column;
+        position: fixed;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        top: 0;
+        right: 100%;
+        transition: 300ms ease;
+        background-color: #fbdac7;
+    }
+
+    .showToggleNav {
+        right: 0;
+    }
+
+    /* Handle Hero Section */
+
+    .hero {
+        background-image: url(/public/Images/main.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        object-fit: cover;
+        background-size: cover;
+    }
+
+    .heroDescription h1 {
+        color: #ffffff;
+        font-size: 2.7rem;
+    }
+
+    .heroImageContainer {
+        display: none;
+    }
+
+    /* Speciality */
+    #Scan .specialityImg img {
+        width: 48vw;
+    }
+}
+
+@media screen and (max-width: 481px) {
+    /* Hero Section */
+
+    .heroDescription h1 {
+        color: #ffffff;
+        font-size: 2rem;
+    }
+
+    /* Instructions */
+    .speciality {
+        margin: 3rem auto;
+    }
+    .specialityDescription h3 {
+        text-align: center;
+    }
+    .specialityImg {
+        display: none;
+    }
+
+    /* Recommendation */
+    .dishContainer {
+        flex-wrap: wrap;
+    }
+
+    .dish {
+        width: 43vw;
+        margin-top: 1rem;
+    }
+
+    #Scan .specialityImg {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .specialityDescription h3 {
+        text-align: left;
+    }
+
+    #Scan .specialityDescription p {
+        font-size: 0.7rem;
+        gap: 0.5rem;
+    }
+}
