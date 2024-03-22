@@ -1,5 +1,6 @@
 const Razorpay = require('razorpay');
-var instance = new Razorpay({ key_id: process.env.KEY_ID, key_secret: process.env.KEY_SECRET })
+// var instance = new Razorpay({ key_id: process.env.KEY_ID, key_secret: process.env.KEY_SECRET })
+var instance = new Razorpay({ key_id: 'rzp_test_zUZEn0N0u6OC4I', key_secret: 'OCCrueQhFDCHhDQJOA2PS4h3' })
 const paymentModel = require('../../Model/Payment.Model');
 
 const crypto = require('crypto');
