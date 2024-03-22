@@ -1,6 +1,9 @@
 const Razorpay = require('razorpay');
 // var instance = new Razorpay({ key_id: process.env.KEY_ID, key_secret: process.env.KEY_SECRET })
-var instance = new Razorpay({ key_id: 'rzp_test_zUZEn0N0u6OC4I', key_secret: 'OCCrueQhFDCHhDQJOA2PS4h3' })
+let key_id = 'rzp_test_zUZEn0N0u6OC4I'
+
+let key_secret = 'OCCrueQhFDCHhDQJOA2PS4h3'
+var instance = new Razorpay({ key_id, key_secret })
 
 const paymentModel = require('../../Model/Payment.Model');
 
@@ -55,7 +58,7 @@ const verifyPayment = async (req, res) => {
         const text = `${razorpay_order_id}|${razorpay_payment_id}`;
 
         // Added fallback value for secret key
-        const generatedSignature = crypto.createHmac('sha256', process.env.KEY_SECRET || 'your_secret_key').update(text).digest('hex');
+        const generatedSignature = crypto.createHmac('sha256', key_secret).update(text).digest('hex');
 
         if (generatedSignature === razorpay_signature) {
             const updatedData = await paymentModel.findOneAndUpdate({ order_id: razorpay_order_id }, {
