@@ -13,7 +13,8 @@ app.use(cors());
 // Route Importing
 const adminAuthRoute = require('./Routes/Admin/AdminAuth.Route');
 const dishesRoute = require('./Routes/Admin/Dishes.Routes');
-const paymentRoute = require('./Routes/User/Payment.routes');
+// const paymentRoute = require('./Routes/User/Payment.routes');
+const paymentRoute = require('./Routes/User/Payment.Routes');
 const orderRoute = require('./Routes/Admin/Payment.Route');
 const sendVerifyMail = require('./Routes/User/SendVerifyEmail.Routes');
 const UserAuthentication = require('./Routes/User/UserAuthentication.Routes');
