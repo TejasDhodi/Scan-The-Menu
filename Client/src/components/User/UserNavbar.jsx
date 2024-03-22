@@ -3,19 +3,24 @@ import { NavLink, useLocation } from 'react-router-dom'
 import '../../Styles/User/UserComponent.css'
 import ProfileLinks from './ProfileLinks';
 import { FaChevronDown, FaShoppingCart, FaUser } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 const UserNavbar = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
+  const cartLength = useSelector(state => state.cart.data).length;
+  const userName = useSelector(state => state.authentication.userProfile?.fullName);
+  const authToken = useSelector(state => state.authentication.data);
   const location = useLocation();
 
   const handleShowProfile = () => setShowProfile(!showProfile);
 
   useEffect(() => {  
-    const path = location.pathname.includes('/admin') || location.pathname.includes('/adminAuth') || location.pathname.includes('/menuManage') || location.pathname.includes('/createDish');
+    const path = location.pathname.includes('/admin') || location.pathname.includes('/adminAuth') || location.pathname.includes('/menuManage') || location.pathname.includes('/createDish') || location.pathname.includes('/orders');
     setIsAdmin(path)
   }, [location.pathname])
+  
   return (
     <>
       <header id='header'>
@@ -30,8 +35,8 @@ const UserNavbar = () => {
           </ul>
 
           <ul className="carts">
-            <li><NavLink className='linkIcons'><FaShoppingCart /> Cart</NavLink></li>
-            <li><NavLink className='linkIcons' onClick={handleShowProfile}><FaUser /> Tejas <FaChevronDown className={showProfile ? 'down' : ''} /></NavLink></li>
+            <li ><NavLink className='linkIcons' to={'/menu/cart'} ><FaShoppingCart /> Cart {cartLength}</NavLink></li>
+            <li><NavLink className='linkIcons' onClick={handleShowProfile}><FaUser /> { authToken && userName? userName : 'Please Login'} <FaChevronDown className={showProfile ? 'down' : ''} /></NavLink></li>
           </ul>
           <div className="hamburger"></div>
         </nav>

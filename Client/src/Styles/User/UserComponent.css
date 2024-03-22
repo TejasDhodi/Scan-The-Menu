@@ -161,7 +161,7 @@
 
 .dish {
     height: auto;
-    width: 22%;
+    width: 20rem;
     position: relative;
 }
 
@@ -172,7 +172,7 @@
     border-radius: 1.2rem;
 }
 
-.dishImage span {
+.dishImage .dishDetals, .dishImage .category {
     position: absolute;
     right: 0;
     top: 0;
@@ -180,6 +180,36 @@
     border-radius: 50%;
     color: #EA6D27;
     cursor: pointer;
+    width: 2rem;
+}
+
+.dishImage .veg {
+    left: 0;
+    color: green;
+}
+
+.dishImage .nonveg {
+    left: 0;
+    color: red;
+}
+
+.dish .likePart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.dish .likePart svg {
+    font-size: 6rem;
+    color: red;
+    transform: scale(0);
+    transition: 100ms ease;
+}
+
+.dish .popLike svg {
+    transform: scale(1);
 }
 
 /* Scan The QR */
@@ -204,3 +234,67 @@
 #Scan .specialityDescription p svg{
     color: #EA6D27;
 }
+
+/* Filter Component */
+
+.menu {
+    width: 90%;
+}
+
+.searChFilter {
+    text-align:  center;
+    margin: 4rem 0 0;
+
+}
+
+.searChFilter input{
+    width: 80%;
+    margin: 1rem auto;
+    padding: 1rem;
+    border: 1px solid;
+    border-radius: 1rem;
+    text-align: center;
+    background: #585858;
+    color: #ffff;
+}
+
+/* Multifilter Component */
+.multiFilter {
+    position: fixed;
+    right: 0;
+    height: 100%;
+    background: #585858;
+    padding: 5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    color: #c5c5c5;
+}
+
+.filters {
+    margin: 1rem 0;
+    border-bottom: 1px solid;
+}
+
+.filters select {
+    color: #c5c5c5;
+}
+
+.cusineFilter {
+    margin: 1rem 0;
+}
+
+.cusineFilter .checkBoxes, .priceFilter .prices {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+}
+
+.inputLabel {
+    text-decoration: none;
+    line-height: 2.2;
+}
+
+.disableCheck {
+    text-decoration:line-through;
+}
+

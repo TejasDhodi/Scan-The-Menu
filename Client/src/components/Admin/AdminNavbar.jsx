@@ -12,7 +12,7 @@ const AdminNavbar = () => {
                 </div>
                 <div className="adminNavItems">
                     <li className='adminNavList'><NavLink to='/admin' className='adminNavLink'>Dashboard</NavLink></li>
-                    <li className='adminNavList'><NavLink to='' className='adminNavLink'>Orders</NavLink></li>
+                    <li className='adminNavList'><NavLink to='/orders' className='adminNavLink'>Orders</NavLink></li>
                     <li className='adminNavList'><NavLink to='/menuManage' className='adminNavLink'>Menu</NavLink></li>
                     <li className='adminNavList'><NavLink to='/createDish' className="addDishControll"> <IoMdAdd /> </NavLink ></li>
                 </div>

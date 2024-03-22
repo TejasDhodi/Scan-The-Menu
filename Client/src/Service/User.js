@@ -1,3 +1,4 @@
+// Speciality Component Data
 export const speciality = [
     {
         img: "/Images/dish-2.png",
@@ -16,58 +17,7 @@ export const speciality = [
     },
 ];
 
-export const recommendations = [
-    {
-        title: "Paneer Tikka",
-        img: 'https://media.istockphoto.com/id/1186759790/photo/paneer-tikka-at-skewers-in-black-bowl-at-dark-slate-background-paneer-tikka-is-an-indian.webp?b=1&s=170667a&w=0&k=20&c=5xD3IxRiEuT7WN4ixTc7iM3DHLS_1LzbwltaWHvTYvk=',
-    },
-    {
-        title: "Dal Bati",
-        img: 'https://media.istockphoto.com/id/521667919/photo/indian-rajasthani-food-dal-bati-laddu-salad.webp?b=1&s=170667a&w=0&k=20&c=XkJqqv2gKN4PrrDAg00DRSlfBMxe6_t9BBagvhT6B8M=',
-    },
-    {
-        title: "Kaju Masala",
-        img: 'https://media.istockphoto.com/id/1079019028/photo/cashew-curry-indian-kaju-masala-served-in-a-bowl-or-pan-selective-focus.webp?b=1&s=170667a&w=0&k=20&c=9pJjJuXcxel-sTk4RGUndHSgEXCQrCMVgqcavpzAFSg=',
-    },
-    {
-        title: "Paneer Biryani",
-        img: 'https://media.istockphoto.com/id/1292443683/photo/hyderabadi-veg-paneer-dum-biryani-with-mixed-veggies-like-paneer-potato-carrots-peas-cooked.webp?b=1&s=170667a&w=0&k=20&c=MpDtHAICwiLLgQrbUEfBhvAnSihooWlOKo-t9a-vyoc=',
-    },
-]
-
-export const dishes = [
-    {
-        title: "Paneer Tikka",
-        img: 'https://media.istockphoto.com/id/1186759790/photo/paneer-tikka-at-skewers-in-black-bowl-at-dark-slate-background-paneer-tikka-is-an-indian.webp?b=1&s=170667a&w=0&k=20&c=5xD3IxRiEuT7WN4ixTc7iM3DHLS_1LzbwltaWHvTYvk=',
-        price: 250,
-        macros: {
-            protein: 25,
-            carbs: 50,
-            fat: 10
-        },
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo suscipit aliquam ipsam nulla nobis aut ut adipisci voluptatum, doloribus, repudiandae quam, exercitationem voluptate laboriosam tempore iste dolor dolorum animi corporis!",
-        ingredients: "repudiandae quam, exercitationem voluptate laboriosam tempore iste dolor dolorum animi corporis!",
-        type: 'Veg',
-        category: "Main Courses"
-    },
-    {
-        title: "Dal Bati",
-        img: 'https://media.istockphoto.com/id/521667919/photo/indian-rajasthani-food-dal-bati-laddu-salad.webp?b=1&s=170667a&w=0&k=20&c=XkJqqv2gKN4PrrDAg00DRSlfBMxe6_t9BBagvhT6B8M=',
-        price: 100,
-        macros: {
-            protein: 25,
-            carbs: 50,
-            fat: 10
-        },
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo suscipit aliquam ipsam nulla nobis aut ut adipisci voluptatum, doloribus, repudiandae quam, exercitationem voluptate laboriosam tempore iste dolor dolorum animi corporis!",
-        ingredients: "repudiandae quam, exercitationem voluptate laboriosam tempore iste dolor dolorum animi corporis!",
-        type: 'Nonveg',
-        category: "Main Courses"
-    },
-
-]
-
-
+// Instructs Of Scan The Menu
 export const instructions = [
     {
         img: "/Images/Scanner.png",
@@ -103,19 +53,8 @@ export const instructions = [
     },
 ]
 
+// Register Credentials
 export const registerCredentials = [
-    {
-        name: "firstName",
-        type: 'text',
-        id: 'first',
-        heading: 'First Name'
-    },
-    {
-        name: "lastName",
-        type: 'text',
-        id: 'last',
-        heading: 'Last Name'
-    },
     {
         name: "email",
         type: 'email',
@@ -123,10 +62,10 @@ export const registerCredentials = [
         heading: 'Email Id'
     },
     {
-        name: "phone",
+        name: "fullName",
         type: 'text',
-        id: 'phone',
-        heading: 'Phone Number'
+        id: 'first',
+        heading: 'Full Name'
     },
     {
         name: "password",
@@ -142,12 +81,14 @@ export const registerCredentials = [
     },
 ];
 
+
+// Login Credentials
 export const loginCredentials = [
     {
-        name: "phone",
-        type: 'text',
-        id: 'phone',
-        heading: 'Phone Number'
+        name: "email",
+        type: 'email',
+        id: 'email',
+        heading: 'Email Id'
     },
     {
         name: "password",
@@ -157,6 +98,8 @@ export const loginCredentials = [
     },
 ];
 
+
+// Contact Credentials
 export const contactCredentials = [
     {
         name: "Name",
@@ -172,6 +115,8 @@ export const contactCredentials = [
     },
 ];
 
+
+// Contact Cart Credentials
 export const contactCard = [
     {
         icon: "FaPhoneVolume",
@@ -187,5 +132,65 @@ export const contactCard = [
         icon: "FaLocationArrow",
         title: "Address",
         description: "Maharashtra, Dahanu 401602"
+    },
+];
+
+
+// Price Range Credentials
+export const priceRange = [
+    {
+        label: 'Less than $50',
+        price: [0, 50]
+    },
+    {
+        label: '$50 - $100',
+        price: [50, 100]
+    },
+    {
+        label: '$100 - $150',
+        price: [100, 150]
+    },
+    {
+        label: '$150 - $250',
+        price: [150, 250]
+    },
+    {
+        label: 'More than $250',
+        price: [250, Infinity]
+    }
+];
+
+
+// Menu Page Carouser Categorization Credentials
+export const filteration = [
+    {
+        title: 'Vegiterian Dishes',
+        type: 'type',
+        name: 'veg',
+    },
+    {
+        title: 'Non-Vegiterian Dishes',
+        type: 'type',
+        name: 'nonveg'
+    },
+    {
+        title: 'Indian Cusine',
+        type: 'cusine',
+        name: 'Indian',
+    },
+    {
+        title: 'Italian Cusine',
+        type: 'cusine',
+        name: 'Italian',
+    },
+    {
+        title: 'Mexican Cusine',
+        type: 'cusine',
+        name: 'Mexican',
+    },
+    {
+        title: 'Chinese Cusine',
+        type: 'cusine',
+        name: 'Chinese',
     },
 ]

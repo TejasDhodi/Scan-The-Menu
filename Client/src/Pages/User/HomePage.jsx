@@ -4,18 +4,15 @@ import SpecialityComponent from '../../components/User/SpecialityComponent'
 import SectionTitle from '../../components/User/SectionTitle'
 import DishesComponent from '../../components/User/DishesComponent'
 import BlurBackground from '../../components/User/BlurBackground'
-import { speciality, recommendations, instructions } from '../../Service/User'
+import { speciality, instructions } from '../../Service/User'
+import { useSelector } from 'react-redux'
 const HomePage = () => {
 
-  const [showDescription, setShowDescription] = useState(false);
-
-  const handleShowDescription = () => {
-    setShowDescription(true);
-  }
+  const recommendations = useSelector(state => state.Dish.Dishes);
 
   return (
     <>
-      <main>
+      <main className='main'>
         <section id='heroSection'>
           <HeroComponent />
         </section>
@@ -43,22 +40,19 @@ const HomePage = () => {
           <SectionTitle title={'Our Recommended Dishes'} />
           <div className='dishContainer'>
             {
-              recommendations.map((currElem, index) => {
-                const { img, title } = currElem;
+              recommendations && recommendations.slice(0, 4).map((currElem, index) => {
+                const { file, dishName, type } = currElem;
                 return (
                   <DishesComponent
-                    img={img}
-                    title={title} s
-                    howDescription={showDescription}
-                    setShowDescription={setShowDescription}
-                    handleShowDescription={handleShowDescription}
+                    file={file}
+                    dishName={dishName}
+                    type={type}
                     key={index}
                   />
                 )
               })
             }
           </div>
-          {showDescription && <BlurBackground />}
         </section>
 
         <section id='Scan' className='section'>

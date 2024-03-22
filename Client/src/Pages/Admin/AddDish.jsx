@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
-import { IoMdClose } from "react-icons/io";
 import axios from 'axios'
+import DishFormComponent from '../../components/Admin/DishFormComponent';
 
 const AddDish = () => {
   const [inputs, setInputs] = useState({
@@ -9,8 +9,9 @@ const AddDish = () => {
     dishPrice: "",
     dishDescription: "",
     dishIngredients: "",
-    type: "",       
-    category: ""
+    type: "",
+    category: "",
+    cusine: ""
   })
 
   const [file, setFile] = useState(null);
@@ -41,6 +42,7 @@ const AddDish = () => {
       formData.append('file', file);
       formData.append('type', inputs.type);
       formData.append('category', inputs.category);
+      formData.append('cusine', inputs.cusine);
 
       const response = await axios.post('http://localhost:3000/api/v1/createDish', formData, {
         headers: {
@@ -58,13 +60,15 @@ const AddDish = () => {
           dishMacros: "",
           dishPrice: "",
           dishDescription: "",
-          dishIngredients: ""
+          dishIngredients: "",
+          type: "",
+          category: "",
+          cusine: ""
         })
 
-        setShowAddDish(false)
+        setFile(null)
       }
     } catch (error) {
-      alert('Unable to create')
       console.log('error', error);
     }
   }
@@ -73,12 +77,10 @@ const AddDish = () => {
 
   return (
     <>
-      <div className="addDishContainer">
-        <form className='addDishDetails' onSubmit={handleSubmit}>
+      <main className="addDishContainer">
+        {/* <form className='addDishDetails' onSubmit={handleSubmit}>
           <h2>Add Dish</h2>
-          <div className="closeDishContainer">
-            <IoMdClose />
-          </div>
+
           <div className="dishTitle">
             <div className="inputs">
               <label htmlFor="dishName">Dish Name</label>
@@ -87,37 +89,60 @@ const AddDish = () => {
           </div>
 
           <div className="dishData">
-            <div className="inputs">
-              <label htmlFor="dishMacros">Dish Macros</label>
-              <input type="text" id='dishMacros' name='dishMacros' value={inputs.dishMacros} onChange={handleInputs} placeholder='Add Dish Macros' required />
-            </div>
-
-            <div className="inputs">
-              <label htmlFor="dishPrice">Dish Price</label>
-              <input type="text" id='dishPrice' name='dishPrice' value={inputs.dishPrice} onChange={handleInputs} placeholder='Add Dish Price' required />
-            </div>
 
             <div className="inputs">
               <label htmlFor="dishImage">Dish Image</label>
               <input type='file' id='dishImage' onChange={handleFile} required />
             </div>
 
-            <div className="inputs">
-              <label htmlFor="dishIngredients">Dish Ingredients</label>
-              <textarea id='dishIngredients' name='dishIngredients' cols="40" rows="5" value={inputs.dishIngredients} onChange={handleInputs} placeholder='Add Dish Description' required />
-            </div>
-
-            <div className="inputs">
-              <label htmlFor="dishDescription">Dish Description</label>
-              <textarea id='dishDescription' name='dishDescription' cols="40" rows="5" value={inputs.dishDescription} onChange={handleInputs} placeholder='Add Dish Description' required />
-            </div>
+            {
+              inputFields.map((field, index) => {
+                const { name, label, type, ref, rows, col } = field;
+                return (
+                  <div className="inputs" key={index}>
+                    <label htmlFor={name} key={index * 2}>{label}</label>
+                    {
+                      type === 'textarea' ? (
+                        <textarea
+                          id={name}
+                          name={name}
+                          value={inputs[name]}
+                          onChange={handleInputs}
+                          placeholder={`Add ${label}`}
+                          rows={rows}
+                          cols={col}
+                          required
+                        />
+                      ) : (
+                        <input
+                          type={type}
+                          id={name}
+                          name={name}
+                          value={inputs[name]}
+                          onChange={handleInputs}
+                          placeholder={`Add ${label}`}
+                          ref={ref}
+                          required={type !== 'file'}
+                        />
+                      )
+                    }
+                  </div>
+                )
+              })
+            }
 
             <div className="inputs">
               <label htmlFor="type">Type</label>
               <select name="type" value={inputs.type} onChange={handleInputs} id="type">
                 <option value='' disabled>Select Type</option>
-                <option value='veg'>Veg</option>
-                <option value='nonveg'>Non-Veg</option>
+                {
+                  dishTypes.map((types, index) => {
+                    const { name, value } = types;
+                    return (
+                      <option value={value} key={index * 3}>{name}</option>
+                    )
+                  })
+                }
               </select>
             </div>
 
@@ -125,12 +150,28 @@ const AddDish = () => {
               <label htmlFor="category">Category</label>
               <select name="category" value={inputs.category} onChange={handleInputs} id="category">
                 <option value='' disabled>Select Category</option>
-                <option value='Appetizers'>Appetizers</option>
-                <option value='Soups'>Soups</option>
-                <option value='Salads'>Salads</option>
-                <option value='Main Courses'>Main Courses</option>
-                <option value='Desserts'>Desserts</option>
-                <option value='Beverages'>Beverages</option>
+                {
+                  dishCategories.map((category, index) => {
+                    const { names } = category;
+                    return (
+                      <option value={names} key={index * 4}>{names}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+            <div className="inputs">
+              <label htmlFor="cusine">Cusine</label>
+              <select name="cusine" id="cusine" value={inputs.cusine} onChange={handleInputs}>
+                <option value="" disabled>Select Cusine</option>
+                {
+                  dishCusines.map((cusines, index) => {
+                    const { names } = cusines;
+                    return (
+                      <option value={names} key={index * 5}>{names}</option>
+                    )
+                  })
+                }
               </select>
             </div>
 
@@ -140,8 +181,15 @@ const AddDish = () => {
             <button type="submit">Add Dish</button>
           </div>
 
-        </form>
-      </div>
+        </form> */}
+        <DishFormComponent
+          handleSubmit={handleSubmit}
+          handleInputs={handleInputs}
+          handleFile={handleFile}
+          inputs={inputs}
+          focusDishName={focusDishName}
+        />
+      </main>
     </>
   )
 }

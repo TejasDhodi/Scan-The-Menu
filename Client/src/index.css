@@ -15,7 +15,21 @@ body {
   position: relative;
 }
 
-main {
+table {
+  width: 100%;
+    text-align: left;
+    /* border-collapse: collapse; */
+    border-spacing: 0;
+}
+
+table thead{
+  border-bottom: 1px solid;
+}
+table tr td {
+  padding: 1rem;
+}
+
+.main {
   margin: 0 7%;
 }
 
@@ -74,6 +88,13 @@ h4 {
   text-transform: uppercase
 }
 
+h5 {
+  color: #101A24;
+  font-size: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase
+}
+
 p {
   color: #5C6574;
   text-align: justify;
@@ -91,11 +112,29 @@ a {
   line-height: 29px;
 }
 
+th {
+  padding: 0.8rem;
+  text-align: center;
+  border-bottom: 1px solid gray;
+}
+
+td {
+  background-color: #a3a3a324;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.dFlex {
+  display: flex;
+  align-items: center;
+}
+
 .linkIcons {
   display: flex;
   align-items: center;
   gap: 1rem;
   font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .linkIcons svg {

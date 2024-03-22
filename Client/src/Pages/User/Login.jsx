@@ -1,25 +1,22 @@
 import React, { useState } from 'react'
-import { loginCredentials } from '../../Service/User'
-import UserInputComponent from '../../components/User/UserInputComponent';
-import OtpComponent from '../../components/User/OtpComponent';
 import { NavLink } from 'react-router-dom'
 import { FaUserCircle } from 'react-icons/fa';
+import axios from 'axios';
+import {useDispatch} from 'react-redux'
+import { saveAuthToken } from '../../Features/AuthSlice';
 
 const Login = () => {
 
-  const [showVerification, setShowVerification] = useState(false);
-
   const [loginInputs, setLoginInputs] = useState({
-    phone: '',
-    password: ''
+    email: '',
+    password: '',
+    enteredOtp: ''
   });
 
-  const [oneTimePassword, setOneTimePassword] = useState({
-    digit1: '',
-    digit2: '',
-    digit3: '',
-    digit4: '',
-  })
+  const [showVerification, setShowVerification] = useState(false);
+  const [showInputs, setShowInputs] = useState(false);
+  const [authToken, setAuthToken] = useState('');
+
 
   const handleLoginInputs = (e) => {
     const { value, name } = e.target;
@@ -27,54 +24,125 @@ const Login = () => {
       ...loginInputs,
       [name]: value
     });
-
-    setOneTimePassword({
-      ...oneTimePassword,
-      [name]: value
-    })
   }
+
+  const dispatch = useDispatch();
+
+
+  // To Send Otp
+  const handleSendOtp = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/v1/sendmail', { email: loginInputs.email }, {
+        headers: {
+          "Content-Type": 'application/json'
+        }
+      })
+
+      if (response.status === 200) {
+        setShowVerification(true);
+        alert('Otp Sent')
+      }
+    } catch (error) {
+      console.log('Error While Sending Otp To Mail');
+    }
+  }
+
+  // To Verify Otp
+  const handleVerifyOtp = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/v1/sendmail/verify', {
+        email: loginInputs.email,
+        enteredOtp: Number(loginInputs.enteredOtp)
+      });
+
+      const data = response.data;
+
+      if (response.status === 200) {
+        alert('Email Verified');
+        setAuthToken(data?.token)
+        setShowInputs(true);
+        setShowVerification(false)
+      }
+
+    } catch (error) {
+      console.log('Unable to verify otp : ', error);
+    }
+  }
+
+  const handleLoginUser = async (e) => {
+    try {
+      e.preventDefault();
+
+      const response = await axios.post('http://localhost:3000/api/v1/login', loginInputs, {
+        headers: {
+          "Content-Type": 'application/json',
+          Authorization: `Bearer ${authToken}`
+        }
+      })
+
+      const data = response.data;
+      console.log('Auth Token : ', data?.token);
+
+      if(response.status === 200) {
+        alert('Login SuccessFull');
+        dispatch(saveAuthToken(data?.token))
+      }
+
+    } catch (error) {
+      console.log('Unable to login user');
+    }
+  }
+
   return (
-    <div className='formContainer'>
-      <form className='form'>
+    <main className='formContainer'>
+      <form className='form login' onSubmit={handleLoginUser}>
         <div className={showVerification ? "inputField loginInputField hideInputField" : "inputField loginInputField"}>
           <div className="authHeader linkIcons">
             <FaUserCircle />
             <h3>Login</h3>
           </div>
-          {
-            loginCredentials.map((currElem, index) => {
-              const { id, name, type, heading } = currElem;
-              return (
-                <UserInputComponent
-                  id={id}
-                  name={name}
-                  type={type}
-                  heading={heading}
-                  key={index}
-                  handleInputs={handleLoginInputs}
-                  Inputs={loginInputs}
-                />
-              )
-            })
-          }
-          <div className="controls">
-            <button type='button' className='btn' onClick={() => setShowVerification(true)}>Next</button>
+
+          <div className="inputFields">
+            <div className="inputs">
+              <label htmlFor="email">Email Id</label>
+              <div className="emailVal">
+                <input type="email" name="email" id="email" value={loginInputs.email} onChange={handleLoginInputs} placeholder='Enter Your Email Id' autoFocus />
+                {
+                  showInputs ?
+                    <span>✅</span> :
+                    <button onClick={handleSendOtp}>{showVerification ? 'Resend' : 'Get Otp'}</button>
+                }
+              </div>
+              {
+                showVerification &&
+                <div className="emailVal otpVal">
+                  <input type="text" name="enteredOtp" id="enteredOtp" value={loginInputs.enteredOtp} onChange={handleLoginInputs} autoFocus />
+                  <button onClick={handleVerifyOtp}>Verify</button>
+                </div>
+              }
+            </div>
+
+            {
+              showInputs &&
+              <div className="inputs">
+                <label htmlFor="password">Password</label>
+                <input type="password" name='password' id='password' value={loginInputs.password} onChange={handleLoginInputs} />
+              </div>
+
+            }
           </div>
+
+          <div className="controls">
+            <button type='submit' className='btn'>Login</button>
+          </div>
+
           <div className="askAccount">
             <p>Don't have an Account?? <NavLink to='/signup'>Click Here</NavLink> </p>
           </div>
         </div>
 
-        <div className={showVerification ? "verificationField showVerificationField" : "verificationField"}>
-          <OtpComponent
-            setShowVerification={setShowVerification}
-            oneTimePassword={oneTimePassword}
-            handleInputs={handleLoginInputs}
-          />
-        </div>
-
       </form>
-    </div>
+    </main>
   )
 }
 

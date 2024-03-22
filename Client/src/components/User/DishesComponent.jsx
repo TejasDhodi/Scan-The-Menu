@@ -1,42 +1,64 @@
-import React, { useState } from 'react'
-import { FaQuestion, FaHeart } from "react-icons/fa";
+import React, { useEffect, useState } from 'react'
+import { FaHeart, FaQuestion } from "react-icons/fa";
+import { IoTriangleSharp } from "react-icons/io5";
+import { add } from '../../Features/CartSlice';
+import { useDispatch } from 'react-redux';
+import { addToWishList, removeFromWishList } from '../../Features/WishListSlice';
 
-const DishesComponent = ({ img, title, showDescription, setShowDescription, handleShowDescription, price }) => {
+const DishesComponent = ({ file, dishName, type, handleShowDescription, dishPrice, currElem, wishList }) => {
+
+  const dispatch = useDispatch();
+  const [popUp, setPopUp] = useState(false)
+
+  const handleWishList = (dish) => {
+    console.log(dish);
+    setPopUp(true)
+
+    setTimeout(() => {
+      setPopUp(false)
+    }, 300);
+
+    dispatch(addToWishList(dish))
+  };
 
 
   return (
     <>
-      <div className='dish'>
+      <div className='dish' onDoubleClick={() => handleWishList(currElem)}>
+        <div className={popUp ? "likePart popLike" : "likePart"}>
+          <FaHeart />
+        </div>
         <div className="dishImage">
-          <img src={img} alt={title} />
-          <span onClick={handleShowDescription}>< FaQuestion /></span>
+          <img src={file} alt={dishName} />
+          {handleShowDescription && <span className='dishDetals' onClick={() => handleShowDescription(dishName)}>< FaQuestion /></span>}
+          <span className={type === 'veg' ? 'category veg' : 'category nonveg'}><IoTriangleSharp /></span>
         </div>
         <div className="dishBody">
           <div className="dishtHeader">
-            <h3>{title}</h3>
+            <h3>{dishName}</h3>
           </div>
-          <div className="priceContainer">
-            <p>{price}Rs</p>
-            <div className="controls">
-              <button className='btn'>Add To Cart</button>
+          {
+            dishPrice &&
+            <div className="priceContainer">
+              {
+                !wishList ?
+                  <>
+                    <p>{dishPrice}Rs</p>
+                    <div className="controls">
+                      <button className='btn' onClick={() => dispatch(add(currElem))}>Add To Cart</button>
+                    </div>
+                  </> :
+                  <div className="controls expandControls">
+                    <button className='btn' onClick={() => dispatch(add(currElem))}>Add To Cart</button>
+                    <button className='btn' onClick={() => dispatch(removeFromWishList(currElem._id))}>Remove</button>
+                  </div>
+              }
             </div>
-          </div>
-
+          }
         </div>
       </div>
-      <div className={showDescription ? "dishDescription showDishDescription" : "dishDescription"}>
-        {/* <div className="descriptionDetails">
-          <div className="descriptionTitle">
-            <h3>Hihhaa</h3>
-            <h4>Macro Nutrients Per 100g</h4>
-          </div>
-          <div className="descriptionBody">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, aliquid, nulla ratione odit qui voluptate aliquam fuga omnis quia quas numquam in possimus nihil hic, consequuntur a deleniti veritatis quae?</p>
-          </div>
-        </div> */}
-      </div>
     </>
-  )
+  );
 }
 
-export default DishesComponent
+export default DishesComponent;

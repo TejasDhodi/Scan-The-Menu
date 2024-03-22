@@ -175,7 +175,6 @@
 .inputs input, textarea, select {
     width: 100%;
     padding: 0.5rem 1rem;
-    margin-top: 0.5rem;
     background: transparent;
     border: none;
     border-bottom: 1px solid #fff;
@@ -193,6 +192,7 @@
     font-size: 1.5rem;
     font-weight: bolder;
     color: #3d3838;
+    margin-bottom: 0.5rem;
 }
 
 input::placeholder, textarea::placeholder {
